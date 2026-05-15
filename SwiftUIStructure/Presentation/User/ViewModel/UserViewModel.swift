@@ -16,7 +16,13 @@ class UserViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var error: String? = nil
     
-    private lazy var provider = MoyaProvider<UserAPI>()
+//    private lazy var provider = MoyaProvider<UserAPI>()
+    
+    private let userUseCase: UsersUseCase
+
+    init(userUseCase: UsersUseCase) {
+        self.userUseCase = userUseCase
+    }
     
     func getUsers() {
         isLoading = true
@@ -31,11 +37,23 @@ class UserViewModel: ObservableObject {
             return
         }
         
+//        Swift.Task {
+//            do {
+//                let response = try await provider.request(.users)
+//                users = try response.map([UserModel].self)
+//                print("Users: \(users.count)")
+//                isLoading = false
+//            } catch {
+//                print("Error: \(error.localizedDescription)")
+//                self.error = error.localizedDescription
+//                isLoading = false
+//            }
+//        }
+        
         Swift.Task {
             do {
-                let response = try await provider.request(.users)
-                users = try response.map([UserModel].self)
-                print("Users: \(users.count)")
+                let users = try await userUseCase.fetchUsers()
+                self.users = users
                 isLoading = false
             } catch {
                 print("Error: \(error.localizedDescription)")
@@ -43,6 +61,7 @@ class UserViewModel: ObservableObject {
                 isLoading = false
             }
         }
+        
     }
     
 }

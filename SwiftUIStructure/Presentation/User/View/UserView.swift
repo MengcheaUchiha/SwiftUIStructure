@@ -13,7 +13,7 @@ import Moya
 
 struct UserView: View {
     @EnvironmentObject var navigator: FlowNavigator<AppRoute>
-    @StateObject private var viewModel = UserViewModel()
+    @StateObject var viewModel: UserViewModel
     
     var body: some View {
         ZStack {
@@ -66,7 +66,6 @@ extension UserView {
 }
 
 #Preview {
-//    UserView(viewModel: UserViewModel(provider: MoyaProvider<UserAPI>()))
-    UserView()
+    UserView(viewModel: DIContainer.shared.userContainer.makeUsersViewModel())
 }
 

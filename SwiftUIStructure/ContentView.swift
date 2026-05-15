@@ -24,7 +24,7 @@ struct ContentView: View {
                     }
                     .tag(Tab.home)
                 
-                UserView()
+                UserView(viewModel: DIContainer.shared.userContainer.makeUsersViewModel())
                     .tabItem {
                         Label("Users", systemImage: "person")
                     }
@@ -39,7 +39,7 @@ struct ContentView: View {
             .flowDestination(for: AppRoute.self) { route in
                 switch route {
                 case .users:
-                    UserView()
+                    UserView(viewModel: DIContainer.shared.userContainer.makeUsersViewModel())
                     
                 case .albums:
                     AlbumView()
