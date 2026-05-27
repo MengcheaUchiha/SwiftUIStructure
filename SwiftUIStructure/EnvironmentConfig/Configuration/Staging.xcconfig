@@ -11,3 +11,4 @@
 END_POINT = https:/$()/jsonplaceholder.typicode.com
 ENVIRONMENT = Staging
 BUNDLE_ID_SUFFIX = .staging
+APP_DISPLAY_NAME = SwiftUIStructure Staging

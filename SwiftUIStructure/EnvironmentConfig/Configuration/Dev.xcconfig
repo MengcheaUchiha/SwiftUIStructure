@@ -11,3 +11,4 @@
 END_POINT = https:/$()/jsonplaceholder.typicode.com
 ENVIRONMENT = Dev
 BUNDLE_ID_SUFFIX = .dev
+APP_DISPLAY_NAME = SwiftUIStructure Dev

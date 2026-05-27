@@ -15,6 +15,10 @@ final class NetworkProvider<T: TargetType> {
     init(provider: MoyaProvider<T>) {
         self.provider = provider
     }
+    
+    deinit {
+        print("NetworkProvider deinitialized")
+    }
 
     func request(_ target: T) async throws -> Response {
         do {
