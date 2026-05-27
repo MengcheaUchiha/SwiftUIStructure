@@ -231,7 +231,7 @@
 		41058ABD2FC5969D00325B22 /* Prod Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 41EDB6462F82258E003951F9 /* SwiftUIStructure */;
-			baseConfigurationReferenceRelativePath = Configuration/Prod.xcconfig;
+			baseConfigurationReferenceRelativePath = EnvironmentConfig/Configuration/Prod.xcconfig;
 			buildSettings = {
 				APP_ENV = PROD;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -333,7 +333,7 @@
 		41058ABF2FC596C100325B22 /* Staging Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 41EDB6462F82258E003951F9 /* SwiftUIStructure */;
-			baseConfigurationReferenceRelativePath = Configuration/Staging.xcconfig;
+			baseConfigurationReferenceRelativePath = EnvironmentConfig/Configuration/Staging.xcconfig;
 			buildSettings = {
 				APP_ENV = STAGING;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Staging";
@@ -428,7 +428,7 @@
 		41058AC12FC596E200325B22 /* Prod Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 41EDB6462F82258E003951F9 /* SwiftUIStructure */;
-			baseConfigurationReferenceRelativePath = Configuration/Prod.xcconfig;
+			baseConfigurationReferenceRelativePath = EnvironmentConfig/Configuration/Prod.xcconfig;
 			buildSettings = {
 				APP_ENV = PROD;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -523,7 +523,7 @@
 		41058AC32FC596E700325B22 /* Staging Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 41EDB6462F82258E003951F9 /* SwiftUIStructure */;
-			baseConfigurationReferenceRelativePath = Configuration/Staging.xcconfig;
+			baseConfigurationReferenceRelativePath = EnvironmentConfig/Configuration/Staging.xcconfig;
 			buildSettings = {
 				APP_ENV = STAGING;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Staging";
@@ -682,7 +682,7 @@
 		41EDB6502F822590003951F9 /* Dev Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 41EDB6462F82258E003951F9 /* SwiftUIStructure */;
-			baseConfigurationReferenceRelativePath = Configuration/Dev.xcconfig;
+			baseConfigurationReferenceRelativePath = EnvironmentConfig/Configuration/Dev.xcconfig;
 			buildSettings = {
 				APP_ENV = DEV;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
@@ -720,7 +720,7 @@
 		41EDB6512F822590003951F9 /* Dev Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReferenceAnchor = 41EDB6462F82258E003951F9 /* SwiftUIStructure */;
-			baseConfigurationReferenceRelativePath = Configuration/Dev.xcconfig;
+			baseConfigurationReferenceRelativePath = EnvironmentConfig/Configuration/Dev.xcconfig;
 			buildSettings = {
 				APP_ENV = DEV;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";

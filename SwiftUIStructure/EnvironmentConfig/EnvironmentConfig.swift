@@ -15,7 +15,7 @@ final class EnvironmentConfig {
         case prod = "PROD"
     }
     
-    static let standard = EnvironmentConfig()
+    static let shared = EnvironmentConfig()
     
     var environment: Environment {
 //        guard let currentConfiguration = Bundle.main.object(forInfoDictionaryKey: "Configuration") as? String else { return .dev }

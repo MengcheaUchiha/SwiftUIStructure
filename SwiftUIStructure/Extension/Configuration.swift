@@ -14,7 +14,8 @@ class Configuration {
     }
     
     static var baseURL: URL {
-        return URL(string: "https://jsonplaceholder.typicode.com")!
+//        return URL(string: "https://jsonplaceholder.typicode.com")!
+        return URL(string: EnvironmentConfig.shared.endPoint ?? "")!
     }
     
 }

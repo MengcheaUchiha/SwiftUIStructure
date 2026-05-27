@@ -16,7 +16,7 @@ struct SwiftUIStructureApp: App {
             ContentView()
                 .environmentObject(deepLinkManager)
                 .onAppear {
-                    EnvironmentConfig.standard.logConfiguration()
+                    EnvironmentConfig.shared.logConfiguration()
                     let currentConfiguration = Bundle.main.object(forInfoDictionaryKey: "Configuration") as! String
                     print("Configuration: \(currentConfiguration)")
                 }
