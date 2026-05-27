@@ -15,6 +15,11 @@ struct SwiftUIStructureApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(deepLinkManager)
+                .onAppear {
+                    EnvironmentConfig.standard.logConfiguration()
+                    let currentConfiguration = Bundle.main.object(forInfoDictionaryKey: "Configuration") as! String
+                    print("Configuration: \(currentConfiguration)")
+                }
         }
     }
 }

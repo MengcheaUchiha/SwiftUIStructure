@@ -1,0 +1,13 @@
+//
+//  Prod.xcconfig
+//  SwiftUIStructure
+//
+//  Created by Mengchea Saro on 26/5/26.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
+
+END_POINT = https:/$()/jsonplaceholder.typicode.com
+ENVIRONMENT = Prod
+BUNDLE_ID_SUFFIX = 

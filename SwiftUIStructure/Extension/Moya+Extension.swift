@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Moya
+@preconcurrency import Moya
 
 extension MoyaProvider {
     
