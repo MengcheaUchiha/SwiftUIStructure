@@ -15,6 +15,7 @@ PROJECT_NAME="SwiftUIStructure"        # Replace with your app's name
 CENTRAL_DI_FILE="DI/DIContainer.swift" # <-- VERIFY THIS PATH TO YOUR EXISTING FILE
 CENTRAL_NETWORK_FILE="DI/NetworkContainer.swift" # <-- VERIFY NETWORK CONTAINER PATH
 CURRENT_DATE=$(date +"%m/%d/%y") # Generates format like 10/5/26
+UPDATE_CONFIG="false" # Enable update config
 # ---------------------
 
 # Prompt user for the module name if not passed as an argument
@@ -396,67 +397,71 @@ EOF
 # Append Code Snippet to Existing NetworkContainer.swift
 # -----------------------------------------------------------------------------
 
-if [ -f "$CENTRAL_NETWORK_FILE" ]; then
-    if grep -q "lazy var ${MODULE_NAME_LOWER}Provider" "$CENTRAL_NETWORK_FILE"; then
-        echo "ℹ️  ${MODULE_NAME}Provider already mapped in NetworkContainer.swift."
-    else
-        echo "⚙️  Appending provider code blocks into ${CENTRAL_NETWORK_FILE}..."
-        awk -v name="$MODULE_NAME" -v lower="$MODULE_NAME_LOWER" '
-        /^[[:space:]]*\}[[:space:]]*$/ { last_brace_line = NR }
-        { lines[NR] = $0 }
-        END {
-            for (i = 1; i <= NR; i++) {
-                if (i == last_brace_line) {
-                    print "    lazy var " lower "Provider: MoyaProvider<" name "API> = {"
-                    print "        MoyaProvider<" name "API>("
-                    print "            plugins: plugins"
-                    print "        )"
-                    print "    }()"
-                    print ""
-                    print "    lazy var " lower "NetworkProvider: NetworkProvider<" name "API> = {"
-                    print "        NetworkProvider<" name "API>("
-                    print "            provider: " lower "Provider,"
-                    print "        )"
-                    print "    }()"
-                    print ""
+if [[ "$UPDATE_CONFIG" == "true" ]]; then
+    if [ -f "$CENTRAL_NETWORK_FILE" ]; then
+        if grep -q "lazy var ${MODULE_NAME_LOWER}Provider" "$CENTRAL_NETWORK_FILE"; then
+            echo "ℹ️  ${MODULE_NAME}Provider already mapped in NetworkContainer.swift."
+        else
+            echo "⚙️  Appending provider code blocks into ${CENTRAL_NETWORK_FILE}..."
+            awk -v name="$MODULE_NAME" -v lower="$MODULE_NAME_LOWER" '
+            /^[[:space:]]*\}[[:space:]]*$/ { last_brace_line = NR }
+            { lines[NR] = $0 }
+            END {
+                for (i = 1; i <= NR; i++) {
+                    if (i == last_brace_line) {
+                        print "    lazy var " lower "Provider: MoyaProvider<" name "API> = {"
+                        print "        MoyaProvider<" name "API>("
+                        print "            plugins: plugins"
+                        print "        )"
+                        print "    }()"
+                        print ""
+                        print "    lazy var " lower "NetworkProvider: NetworkProvider<" name "API> = {"
+                        print "        NetworkProvider<" name "API>("
+                        print "            provider: " lower "Provider,"
+                        print "        )"
+                        print "    }()"
+                        print ""
+                    }
+                    print lines[i]
                 }
-                print lines[i]
-            }
-        }' "$CENTRAL_NETWORK_FILE" > "${CENTRAL_NETWORK_FILE}.tmp" && mv "${CENTRAL_NETWORK_FILE}.tmp" "$CENTRAL_NETWORK_FILE"
+            }' "$CENTRAL_NETWORK_FILE" > "${CENTRAL_NETWORK_FILE}.tmp" && mv "${CENTRAL_NETWORK_FILE}.tmp" "$CENTRAL_NETWORK_FILE"
+        fi
+    else
+        echo "⚠️  Could not locate ${CENTRAL_NETWORK_FILE}. Skipping network configuration step."
     fi
-else
-    echo "⚠️  Could not locate ${CENTRAL_NETWORK_FILE}. Skipping network configuration step."
 fi
 
 # -----------------------------------------------------------------------------
 # Append Code Snippet to Existing DIContainer.swift
 # -----------------------------------------------------------------------------
 
-if [ -f "$CENTRAL_DI_FILE" ]; then
-    # Prevent duplicate code injection if module is run twice
-    if grep -q "lazy var ${MODULE_NAME_LOWER}Container" "$CENTRAL_DI_FILE"; then
-        echo "ℹ️  ${MODULE_NAME}Container already mapped in DIContainer.swift."
-    else
-        echo "⚙️  Appending container mapping code block directly into ${CENTRAL_DI_FILE}..."
-        
-        awk -v name="$MODULE_NAME" -v lower="$MODULE_NAME_LOWER" '
-        # Track the line position of the last absolute closing brace
-        /^[[:space:]]*\}[[:space:]]*$/ { last_brace_line = NR }
-        { lines[NR] = $0 }
-        END {
-            for (i = 1; i <= NR; i++) {
-                if (i == last_brace_line) {
-                    print "    lazy var " lower "Container: " name "Container = {"
-                    print "        " name "Container(network: networkContainer)"
-                    print "    }()"
-                    print ""
+if [[ "$UPDATE_CONFIG" == "true" ]]; then
+    if [ -f "$CENTRAL_DI_FILE" ]; then
+        # Prevent duplicate code injection if module is run twice
+        if grep -q "lazy var ${MODULE_NAME_LOWER}Container" "$CENTRAL_DI_FILE"; then
+            echo "ℹ️  ${MODULE_NAME}Container already mapped in DIContainer.swift."
+        else
+            echo "⚙️  Appending container mapping code block directly into ${CENTRAL_DI_FILE}..."
+            
+            awk -v name="$MODULE_NAME" -v lower="$MODULE_NAME_LOWER" '
+            # Track the line position of the last absolute closing brace
+            /^[[:space:]]*\}[[:space:]]*$/ { last_brace_line = NR }
+            { lines[NR] = $0 }
+            END {
+                for (i = 1; i <= NR; i++) {
+                    if (i == last_brace_line) {
+                        print "    lazy var " lower "Container: " name "Container = {"
+                        print "        " name "Container(network: networkContainer)"
+                        print "    }()"
+                        print ""
+                    }
+                    print lines[i]
                 }
-                print lines[i]
-            }
-        }' "$CENTRAL_DI_FILE" > "${CENTRAL_DI_FILE}.tmp" && mv "${CENTRAL_DI_FILE}.tmp" "$CENTRAL_DI_FILE"
+            }' "$CENTRAL_DI_FILE" > "${CENTRAL_DI_FILE}.tmp" && mv "${CENTRAL_DI_FILE}.tmp" "$CENTRAL_DI_FILE"
+        fi
+    else
+        echo "⚠️  Could not locate ${CENTRAL_DI_FILE}. Skipping code injection step."
     fi
-else
-    echo "⚠️  Could not locate ${CENTRAL_DI_FILE}. Skipping code injection step."
 fi
 
 echo "✅ Success! Files created and registered inside your existing DIContainer configuration."
