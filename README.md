@@ -34,9 +34,10 @@ When you generate a new module (e.g., `User`), the script creates the following 
 ## 🛠️ Prerequisites
 XcodeGen (Highly Recommended): To ensure files appear instantly inside Xcode without manual drag-and-drop operations, these scripts are built to auto-sync with XcodeGen.
 
-## brew install xcodegen
+```text
+brew install xcodegen
+```
 
-Project Structure:
 Make sure your project.yml file and these scripts are placed together in the same root directory of your project.
 
 ## ⚙️ Setup & Installation
