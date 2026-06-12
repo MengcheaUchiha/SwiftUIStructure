@@ -15,7 +15,7 @@ PROJECT_NAME="SwiftUIStructure"        # Replace with your app's name
 CENTRAL_DI_FILE="DI/DIContainer.swift" # <-- VERIFY THIS PATH TO YOUR EXISTING FILE
 CENTRAL_NETWORK_FILE="DI/NetworkContainer.swift" # <-- VERIFY NETWORK CONTAINER PATH
 CURRENT_DATE=$(date +"%m/%d/%y") # Generates format like 10/5/26
-UPDATE_CONFIG="false" # Enable update config
+UPDATE_CONFIG="true" # Enable update config
 # ---------------------
 
 # Prompt user for the module name if not passed as an argument
@@ -244,7 +244,7 @@ extension ${MODULE_NAME}View {
 }
 
 #Preview {
-    ${MODULE_NAME}View(viewModel: DIContainer.shared.${MODULE_NAME_LOWER}Container.make${MODULE_NAME}sViewModel)
+    ${MODULE_NAME}View(viewModel: DIContainer.shared.${MODULE_NAME_LOWER}Container.make${MODULE_NAME}sViewModel())
 }
 
 EOF
@@ -275,7 +275,7 @@ class ${MODULE_NAME}ViewModel: LoadableObject {
         self.${MODULE_NAME_LOWER}UseCase = ${MODULE_NAME_LOWER}UseCase
     }
     
-    func get${MODULE_NAME}s() {
+    func load() async {
         if Configuration.isPreview {
             state = .loaded([
                 ${MODULE_NAME}Model(id: 1),
