@@ -211,8 +211,8 @@ struct ${MODULE_NAME}View: View {
                     .scaleEffect(1.0, anchor: .center)
             }, errorView: { error in
                 errorView(error: error.localizedDescription)
-            }) { albums in
-                contentView(for: albums)
+            }) { ${MODULE_NAME_LOWER}s in
+                contentView(for: ${MODULE_NAME_LOWER}s)
             }
     }
     
@@ -223,11 +223,11 @@ extension ${MODULE_NAME}View {
     func contentView(for items: [${MODULE_NAME}Model]) -> some View {
         return ScrollView {
             LazyVStack(alignment: .leading) {
-                ForEach(items, id: \.id) { album in
-                    Text("\(album.id)")
+                ForEach(items, id: \.id) { ${MODULE_NAME_LOWER}s in
+                    Text("\(${MODULE_NAME_LOWER}s.id)")
                 }
             }
-            .navigationTitle("Albums")
+            .navigationTitle("${MODULE_NAME_LOWER}s")
         }
     }
     
