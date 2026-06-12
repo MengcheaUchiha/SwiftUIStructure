@@ -28,23 +28,29 @@ When you generate a new module (e.g., `User`), the script creates the following 
     ├── UserContainer.swift                # Dedicated standalone module container
     ├── DIContainer.swift                  # (Appended automatically)
     └── NetworkContainer.swift             # (Appended automatically)
+```
 
-🛠️ Prerequisites
+
+## 🛠️ Prerequisites
 XcodeGen (Highly Recommended): To ensure files appear instantly inside Xcode without manual drag-and-drop operations, these scripts are built to auto-sync with XcodeGen.
 
-# brew install xcodegen
+## brew install xcodegen
 
 Project Structure:
 Make sure your project.yml file and these scripts are placed together in the same root directory of your project.
 
-⚙️ Setup & Installation
+## ⚙️ Setup & Installation
 Before running the scripts for the first time, you must grant them execution permissions on your Mac. Open your terminal at your project's root directory and run:
 
 chmod +x generate_module.sh
 chmod +x remove_module.sh
 
-# Generate script
+## Generate script
+```text
 ./generate_module.sh User
+```
 
-# Remove script
+## Remove script
+```text
 ./remove_module.sh User
+```
